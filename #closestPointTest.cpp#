@@ -1,0 +1,65 @@
+#include <iostream>
+#include <iomanip>
+#include "closestPoint.cpp"
+#include <stdlib.h>
+#include <time.h>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+  srand(time(0));
+  int n = 0;
+  double closest = 0;  
+  int counter = 0;
+  
+  cout << "How many points would you like to have?\n";
+  cin >> n;
+
+
+  /*while(!cin)
+    {
+      cout << "Input is wrong! Please try again with an integer.\n" << endl;
+      
+    }
+  */
+  /*  do {
+    cout << "you stink: ";
+    cin >> n;
+  } while (!cin);
+  */
+  closestPoint arr[n];
+
+  for(int i = 0; i < n; i++)
+    {
+      double temp = rand() % 201 - 100;
+      cout << "Point #" << i + 1 << ": (" << temp << ", ";
+      arr[i].setX(temp);
+      temp = rand() % 201 - 100;
+      cout << temp << ")" << endl;
+      arr[i].setY(temp);
+    }
+
+  double c = 20000;
+  
+  for(int i = 1; i < n - 1; i++)
+    {
+      for(int j = i + 1; j < n; j++)
+	{
+	  c = sqrt(((arr[i].getX() - arr[j].getX()) * (arr[i].getX() - arr[j].getX())) + ((arr[i].get
+											  Y() - arr[j].getY()) * (arr[i].getY() - arr[j].getY())));
+	  cout << c << endl;
+
+
+	  if(c < closest)
+	    {
+	      closest = c;
+	    }
+
+	}
+    }
+
+  cout << "\nThe closest points were " << closest << " in distance.\n" << endl;
+  
+  return 0;
+}
